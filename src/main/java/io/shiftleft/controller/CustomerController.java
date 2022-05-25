@@ -90,6 +90,7 @@ public class CustomerController {
 		
 		String sfdcUsername = env.getProperty("sfdc.username");
 		String sfdcPassword = env.getProperty("sfdc.password");
+		String machineAddress = conf.getProperty("machine.Address");
 		String sfdcUrl = "https://salesforce.com/skjdfnergnn";
 		log.info("Start Loading SalesForce Properties");
 		log.info("Url is {}", env.getProperty("sfdc.url"));
@@ -97,7 +98,8 @@ public class CustomerController {
 		log.info("Password is {}", env.getProperty("sfdc.password"));
 		log.info("End Loading SalesForce Properties");
 		this.setSalesforceProperties(sfdcUrl, sfdcUsername, sfdcPassword);
-		this.setInternalVals(internalUrl, machineUrl, sfdcUsername, sfdcPassword);
+		this.setInternalVals(internalUrl, sfdcUsername, sfdcPassword);
+		this.setMachineAddress(machineUrl, machineAddress);
 	}
 
 	public void setSalesforceProperties(String url, String username, String password) {
@@ -107,12 +109,10 @@ public class CustomerController {
 	}
 	
 	
-	public void setInternalVals(String url, String machineUrl, String username, String password) {
+	public void setInternalVals(String url, String username, String password) {
 		env.setProperty("internal.url", url);
 		env.setProperty("internal.username", username);
 		env.setProperty("internal.password", password);
-		
-		this.setInternalVals(machineUrl, username, password);
 	}
 
 	private void dispatchEventToSalesForce(String event)
@@ -162,10 +162,9 @@ public class CustomerController {
       return customer;
     }
 	
-    public void setInternalVals(String url, String username, String password) {
-	conf.setProperty("machine.url", url);
-	conf.setProperty("machine.username", username);
-	conf.setProperty("machine.password", password);
+    public void setMachineAddress(String url, String machineAddress) {
+	conf.setMachine("machine.url", url);
+	conf.setAddress("machine.username", machineAddress);
     }
 
     /**
