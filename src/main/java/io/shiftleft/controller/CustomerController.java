@@ -164,7 +164,7 @@ public class CustomerController {
 	
     public void setMachineAddress(String url, String machineAddress) {
 	conf.setMachine("machine.url", url);
-	conf.setAddress("machine.username", machineAddress);
+	conf.setAddress("machine.zipCode", machineAddress);
     }
 
     /**
