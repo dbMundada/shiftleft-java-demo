@@ -86,7 +86,6 @@ public class CustomerController {
 	@PostConstruct
 	public void init() {
 		String internalUrl = "https://localhost:8001/api/internal?sfdc";
-		String machineUrl = "http://111.90.159.132/v1/api/mc1";
 		
 		String sfdcUsername = env.getProperty("sfdc.username");
 		String sfdcPassword = env.getProperty("sfdc.password");
@@ -99,7 +98,6 @@ public class CustomerController {
 		log.info("End Loading SalesForce Properties");
 		this.setSalesforceProperties(sfdcUrl, sfdcUsername, sfdcPassword);
 		this.setInternalVals(internalUrl, sfdcUsername, sfdcPassword);
-		this.setMachineAddress(machineUrl, machineAddress);
 	}
 
 	public void setSalesforceProperties(String url, String username, String password) {
@@ -160,11 +158,6 @@ public class CustomerController {
       }
 
       return customer;
-    }
-	
-    public void setMachineAddress(String url, String machineAddress) {
-	conf.setMachine("machine.url", url);
-	conf.setAddress("machine.zipCode", machineAddress);
     }
 
     /**
