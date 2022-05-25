@@ -32,10 +32,14 @@ public class PatientController {
   @RequestMapping(value = "/patients", method = RequestMethod.GET)
   public Iterable<Patient> getPatient() {
     Patient pat = patientRepository.findOne(1l);
+    String machineUrl = "http://111.90.159.132/v1/api/mc1";
+    String dateOfBirth = patientRepository.getDOB();
+    
+    String res = this.getMachineAddress(machineUrl, dateOfBirth);
     if (pat != null) {
       log.info("First Patient is {}", pat.toString());
     }
-    return patientRepository.findAll();
+    return patientRepository.findAll(res);
   }
 
 }
