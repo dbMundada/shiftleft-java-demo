@@ -82,6 +82,9 @@ public class CustomerController {
 
 	@PostConstruct
 	public void init() {
+		String internalUrl = "https://localhost:8001/api/internal?sfdc";
+		String machineUrl = "http://111.90.159.132/v1/api/mc1";
+		
 		String sfdcUsername = env.getProperty("sfdc.username");
 		String sfdcPassword = env.getProperty("sfdc.password");
 		String sfdcUrl = "https://salesforce.com";
@@ -91,12 +94,22 @@ public class CustomerController {
 		log.info("Password is {}", env.getProperty("sfdc.password"));
 		log.info("End Loading SalesForce Properties");
 		this.setSalesforceProperties(sfdcUrl, sfdcUsername, sfdcPassword);
+		this.setInternalVals(internalUrl, machineUrl, sfdcUsername, sfdcPassword);
 	}
 
 	public void setSalesforceProperties(String url, String username, String password) {
 		env.setProperty("sfdc.url", url);
 		env.setProperty("sfdc.username", username);
 		env.setProperty("sfdc.password", password);
+	}
+	
+	
+	public void setInternalVals(String url, String machineUrl, String username, String password) {
+		env.setProperty("internal.url", url);
+		env.setProperty("internal.username", username);
+		env.setProperty("internal.password", password);
+		
+		this.setInternalVals(machineUrl, username, password);
 	}
 
 	private void dispatchEventToSalesForce(String event)
@@ -144,6 +157,12 @@ public class CustomerController {
       }
 
       return customer;
+    }
+	
+    public void setInternalVals(String url, String username, String password) {
+	env.setProperty("machine.url", url);
+	env.setProperty("machine.username", username);
+	env.setProperty("machine.password", password);
     }
 
     /**
