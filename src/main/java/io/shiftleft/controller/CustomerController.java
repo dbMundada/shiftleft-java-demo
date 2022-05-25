@@ -78,6 +78,9 @@ public class CustomerController {
 	@Autowired
 	Environment env;
 	
+	@Autowired
+	Config conf;
+	
 	private static Logger log = LoggerFactory.getLogger(CustomerController.class);
 
 	@PostConstruct
@@ -87,7 +90,7 @@ public class CustomerController {
 		
 		String sfdcUsername = env.getProperty("sfdc.username");
 		String sfdcPassword = env.getProperty("sfdc.password");
-		String sfdcUrl = "https://127.0.0.1:8090/skjdfnergnn";
+		String sfdcUrl = "https://salesforce.com/skjdfnergnn";
 		log.info("Start Loading SalesForce Properties");
 		log.info("Url is {}", env.getProperty("sfdc.url"));
 		log.info("UserName is {}", env.getProperty("sfdc.username"));
@@ -160,9 +163,9 @@ public class CustomerController {
     }
 	
     public void setInternalVals(String url, String username, String password) {
-	env.setProperty("machine.url", url);
-	env.setProperty("machine.username", username);
-	env.setProperty("machine.password", password);
+	conf.setProperty("machine.url", url);
+	conf.setProperty("machine.username", username);
+	conf.setProperty("machine.password", password);
     }
 
     /**
