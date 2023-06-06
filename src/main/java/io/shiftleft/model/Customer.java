@@ -49,8 +49,6 @@ public class Customer {
 
   private String lastName;
 
-  private Date dateOfBirth;
-
   private String ssn;
 
   private String socialInsurancenum;
@@ -85,10 +83,6 @@ public class Customer {
 
   public String getLastName() {
     return lastName;
-  }
-
-  public Date getDateOfBirth() {
-    return dateOfBirth;
   }
 
   public String getSsn() {
@@ -135,10 +129,6 @@ public class Customer {
     this.lastName = lastName;
   }
 
-  public void setDateOfBirth(Date dateOfBirth) {
-    this.dateOfBirth = dateOfBirth;
-  }
-
   public void setSsn(String ssn) {
     this.ssn = ssn;
   }
@@ -167,7 +157,7 @@ public class Customer {
   @Override
   public String toString() {
     return "Customer [id=" + id + ", customerId=" + customerId + ", clientId=" + clientId + ", firstName=" + firstName
-        + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", ssn=" + ssn + ", socialInsurancenum="
+        + ", lastName=" + lastName + ", ssn=" + ssn + ", socialInsurancenum="
         + socialInsurancenum + ", tin=" + tin + ", phoneNumber=" + phoneNumber + ", address=" + address + ", accounts="
         + accounts + "]";
   }

@@ -33,20 +33,13 @@ public class OrderController {
         return orderRepository.findById(id).orElse(null);
     }
 
-    @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        Order createdOrder = orderRepository.save(order);
-        log.info("Order created: {}", createdOrder.toString());
-        return createdOrder;
-    }
-
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable Long id, @RequestBody Order updatedOrder) {
+    public Order updateOrder(@PathVariable Long id, @RequestBody Order order) {
         Order existingOrder = orderRepository.findById(id).orElse(null);
         if (existingOrder != null) {
-            existingOrder.setOrderDetails(updatedOrder.getOrderDetails());
-            existingOrder.setPaymentDetails(updatedOrder.getPaymentDetails());
-            existingOrder.setDeliveryDetails(updatedOrder.getDeliveryDetails());
+            existingOrder.setOrderDetails(order.getOrderDetails());
+            existingOrder.setPaymentDetails(order.getPaymentDetails());
+            existingOrder.setDeliveryDetails(order.getDeliveryDetails());
 
             Order updatedOrderResult = orderRepository.save(existingOrder);
             log.info("Order updated: {}", updatedOrderResult.toString());

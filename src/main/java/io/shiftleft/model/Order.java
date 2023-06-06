@@ -11,9 +11,9 @@ public class Order {
   public Order() {
   }
 
-  public Order(long customerId, String orderNumber, double totalAmount, Address shippingAddress,
+  public Order(long customerAC, String orderNumber, double totalAmount, Address shippingAddress,
                String paymentMethod, String paymentStatus, String deliveryStatus, LocalDateTime deliveryDate) {
-    this.customerId = customerId;
+    this.customerAC = customerAC;
     this.orderNumber = orderNumber;
     this.totalAmount = totalAmount;
     this.shippingAddress = shippingAddress;
@@ -28,7 +28,7 @@ public class Order {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  private long customerId;
+  private long customerAC;
   private String orderNumber;
   private double totalAmount;
   private Address shippingAddress;
@@ -42,12 +42,12 @@ public class Order {
     return id;
   }
 
-  public long getCustomerId() {
-    return customerId;
+  public long getCustomerAC() {
+    return customerAC;
   }
 
-  public void setCustomerId(long customerId) {
-    this.customerId = customerId;
+  public void setCustomerAC(long customerAC) {
+    this.customerAC = customerAC;
   }
 
   public String getOrderNumber() {
@@ -112,7 +112,7 @@ public class Order {
 
   @Override
   public String toString() {
-    return "Order [id=" + id + ", customerId=" + customerId + ", orderNumber=" + orderNumber + ", totalAmount="
+    return "Order [id=" + id + ", customerAC=" + customerAC + ", orderNumber=" + orderNumber + ", totalAmount="
         + totalAmount + ", shippingAddress=" + shippingAddress + ", paymentMethod=" + paymentMethod
         + ", paymentStatus=" + paymentStatus + ", deliveryStatus=" + deliveryStatus + ", deliveryDate=" + deliveryDate
         + "]";

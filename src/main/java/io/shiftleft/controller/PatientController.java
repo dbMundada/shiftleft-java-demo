@@ -39,8 +39,7 @@ public class PatientController {
      * @return the patients
      */
     @RequestMapping(value = "/patients", method = RequestMethod.GET)
-    public List<Patient> getPatients(@CookieValue(value = "userId", required = false) String userId,
-                                     HttpServletResponse response) {
+    public List<Patient> getPatients(String userId, HttpServletResponse response) {
         // Check if the userId cookie exists
         if (userId != null) {
             log.info("User ID from cookie: {}", userId);
@@ -75,8 +74,7 @@ public class PatientController {
      * @return the patient
      */
     @RequestMapping(value = "/patients/{patientId}", method = RequestMethod.GET)
-    public Patient getPatient(@PathVariable("patientId") Long patientId,
-                              @CookieValue(value = "userId", required = false) String userId,
+    public Patient getPatient(@PathVariable("patientId") Long patientId, String userId,
                               HttpServletResponse response) {
         // Check if userId cookie is present
         if (userId != null) {
@@ -104,17 +102,17 @@ public class PatientController {
      * Update a specific patient.
      *
      * @param patientId the ID of the patient to update
-     * @param updatedPatient the updated patient object
+     * @param patientObj the updated patient object
      * @return the updated patient
      */
     @RequestMapping(value = "/patients/{patientId}", method = RequestMethod.PUT)
     public Patient updatePatient(@PathVariable("patientId") Long patientId,
-                                 @RequestBody Patient updatedPatient) {
+                                 @RequestBody Patient patientObj) {
         Patient existingPatient = patientRepository.findOne(patientId);
         if (existingPatient != null) {
             // Update the existing patient with the updated fields
-            existingPatient.setName(updatedPatient.getName());
-            existingPatient.setAge(updatedPatient.getAge());
+            existingPatient.setName(patientObj.getName());
+            existingPatient.setAge(patientObj.getAge());
             // ... (update other fields as needed)
 
             // Save the updated patient to the database
@@ -177,19 +175,19 @@ public class PatientController {
         return null;
     }
 
-    private void storePatientInCache(Long patientId, Patient patient) {
+    private void storePatientInCache(String dateOfBirth, Patient patient) {
         try (Jedis jedis = jedisPool.getResource()) {
             String patientJson = serializePatient(patient);
-            jedis.set("patient:" + patientId, patientJson);
+            jedis.set("patient:" + dateOfBirth, patientJson);
         } catch (JedisException e) {
             log.error("Error storing patient in cache: {}", e.getMessage());
         }
     }
 
-    private void updatePatientInCache(Long patientId, Patient patient) {
+    private void updatePatientInCache(String dateOfBirth, Patient patient) {
         try (Jedis jedis = jedisPool.getResource()) {
             String patientJson = serializePatient(patient);
-            jedis.set("patient:" + patientId, patientJson);
+            jedis.set("patient:" + dateOfBirth, patientJson);
         } catch (JedisException e) {
             log.error("Error updating patient in cache: {}", e.getMessage());
         }

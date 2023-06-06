@@ -28,7 +28,7 @@ public class AuthToken implements Serializable {
     }
   }
 
-  public void setRole(int role) {
+  public void setRole(int role = 1) {
     this.role = role;
   }
 }

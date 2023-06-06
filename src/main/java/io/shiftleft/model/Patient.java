@@ -8,11 +8,10 @@ public class Patient {
   public Patient() {
   }
 
-  public Patient(int patientId, String patientFirstName, String patientLastName, Date dateOfBirth, int patientWeight,
+  public Patient(String patientFirstName, String patientLastName, Date dateOfBirth, int patientWeight,
       int patientHeight, String medications, int body_temperature_deg_c, int heartRate, int pulseRate,
       int bpDiastolic) {
     super();
-    this.patientId = patientId;
     this.patientFirstName = patientFirstName;
     this.patientLastName = patientLastName;
     this.dateOfBirth = dateOfBirth;
@@ -28,8 +27,6 @@ public class Patient {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
-
-  private int patientId;
 
   private String patientFirstName;
 
@@ -53,10 +50,6 @@ public class Patient {
 
   public long getId() {
     return id;
-  }
-
-  public int getPatientId() {
-    return patientId;
   }
 
   public String getPatientFirstName() {
@@ -103,10 +96,6 @@ public class Patient {
     this.id = id;
   }
 
-  public void setPatientId(int patientId) {
-    this.patientId = patientId;
-  }
-
   public void setPatientFirstName(String patientFirstName) {
     this.patientFirstName = patientFirstName;
   }
@@ -149,7 +138,7 @@ public class Patient {
 
   @Override
   public String toString() {
-    return "Patient [id=" + id + ", patientId=" + patientId + ", patientFirstName=" + patientFirstName
+    return "Patient [id=" + id + ", patientFirstName=" + patientFirstName
         + ", patientLastName=" + patientLastName + ", dateOfBirth=" + dateOfBirth + ", patientWeight=" + patientWeight
         + ", patientHeight=" + patientHeight + ", medications=" + medications + ", body_temp_deg_c=" + body_temp_deg_c
         + ", heartRate=" + heartRate + ", pulse_rate=" + pulse_rate + ", bpDiastolic=" + bpDiastolic + "]";

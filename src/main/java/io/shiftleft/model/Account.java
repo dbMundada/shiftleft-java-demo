@@ -18,7 +18,7 @@ public class Account {
 
   private long routingNumber;
 
-  private long accountNumber;
+  private long accNum;
 
   private double balance;
 
@@ -29,8 +29,8 @@ public class Account {
     interest = 0;
   }
 
-  public Account(long accountNumber, long routingNumber, String type, double initialBalance, double initialInterest) {
-    this.accountNumber = accountNumber;
+  public Account(long accNum, long routingNumber, String type, double initialBalance, double initialInterest) {
+    this.accNum = accNum;
     this.routingNumber = routingNumber;
     this.type = type;
     this.balance = initialBalance;
@@ -61,8 +61,8 @@ public class Account {
     return routingNumber;
   }
 
-  public long getAccountNumber() {
-    return accountNumber;
+  public long getAccNum() {
+    return accNum;
   }
 
   public double getBalance() {
@@ -85,8 +85,8 @@ public class Account {
     this.routingNumber = routingNumber;
   }
 
-  public void setAccountNumber(long accountNumber) {
-    this.accountNumber = accountNumber;
+  public void setAccNum(long accNum) {
+    this.accNum = accNum;
   }
 
   public void setBalance(double balance) {
@@ -99,7 +99,7 @@ public class Account {
 
   @Override
   public String toString() {
-    return "Account [id=" + id + ", type=" + type + ", routingNumber=" + routingNumber + ", accountNumber="
-        + accountNumber + ", balance=" + balance + ", interest=" + interest + "]";
+    return "Account [id=" + id + ", type=" + type + ", routingNumber=" + routingNumber + ", accNum="
+        + accNum + ", balance=" + balance + ", interest=" + interest + "]";
   }
 }

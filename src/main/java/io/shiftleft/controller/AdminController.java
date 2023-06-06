@@ -49,7 +49,7 @@ public class AdminController {
 
 
   @RequestMapping(value = "/admin/printSecrets", method = RequestMethod.GET)
-  public String doGetPrintSecrets(@CookieValue(value = "auth", defaultValue = "notset") String auth, HttpServletResponse response, HttpServletRequest request) throws Exception {
+  public String doGetPrintSecrets(String auth, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
     if (request.getSession().getAttribute("auth") == null) {
       return fail;
@@ -82,7 +82,7 @@ public class AdminController {
    * @throws Exception
    */
   @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
-  public String doPostLogin(@CookieValue(value = "auth", defaultValue = "notset") String auth, @RequestBody String password, HttpServletResponse response, HttpServletRequest request) throws Exception {
+  public String doPostLogin(String auth, @RequestBody String password, HttpServletResponse response, HttpServletRequest request) throws Exception {
     String succ = "redirect:/admin/printSecrets";
 
     try {
